@@ -103,5 +103,4 @@ void nop(stack_t **stack, unsigned int line_number)
 {
 	(void) stack; /* this function literally does nothing */
 	(void) line_number;
-	return;
 }
