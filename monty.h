@@ -38,10 +38,18 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+ * struct data_s - holds the data read from monty file
+ * @data: the opcode
+ * @fp: pointer to the file from command line
+ * @line: instruction set on the current line
+ * @stack: references the stack linked list
+ * @line_number: line number for error handling
+ */
 typedef struct data_s
 {
 	int data;
-	FILE *monty_file;
+	FILE *fp;
 	char *line;
 	stack_t *stack;
 	unsigned int line_number;
@@ -50,7 +58,7 @@ typedef struct data_s
 /* global variable */
 extern data_t *command;
 
-/* commands.c */
+/* operators.c */
 void push(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
@@ -69,42 +77,43 @@ void _div(stack_t **stack, unsigned int line_number);
 void mod(stack_t **stack, unsigned int line_number);
 
 /* controller.c */
-void run_op_func(char *op_str);
-int check_for_op(char *opcode);
-int int_check(char *data_n);
+void exec(char *str);
+int search(char *opcode);
+int isint(char *data_n);
 
 /* malloc_free.c */
 stack_t *alloc(void);
 void free_node(void);
 
 /* failcases.c */
-void error(int, char *);
+void error(int, char *info);
 
 /* Function Checkers */
-#define NEED_ARGS 2
-#define NO_ARGS 1
-#define NULL_FUNC 0
-#define SKIP_LINE 3
+#define NEED_ARGS     2
+#define NO_ARGS       1
+#define NULL_FUNC     0
+#define SKIP_LINE     3
 
 /* Error Codes */
 #define NO_ARGS        1
 #define NO_FILE        2
 #define NO_DATA        3
-#define NO_STACK_PINT  4
-#define NO_STACK_POP   5
-#define NO_STACK_PCHAR 6
-#define NE_NODE_SWAP   7
-#define NE_NODE_ADD    8
-#define NE_NODE_SUB    9
-#define NE_NODE_MUL    10
-#define NE_NODE_DIV    11
-#define NE_NODE_MOD    12
+#define PINT_FAIL      4
+#define POP_FAIL       5
+#define PCHAR_FAIL     6
+#define NO_TWO_NODES   7
+#define CANT_ADD       8
+#define CANT_SUB       9
+#define CANT_MUL       10
+#define CANT_DIV       11
+#define CANT_MOD       12
 #define NE_NODE_PCHAR  13
 #define ZERO_DATA_MOD  14
-#define ZERO_DATA_DIV  15
-#define CHAR_OUT_RANGE 16
-#define INVAL_LINE     17
-#define MALLOC_ERR     18
+#define UNDEFINED      15
+#define UNDEFINEDD     16
+#define RANGE_FAIL     17
+#define INVAL_LINE     18
+#define MALLOC_FAIL    19
 
 
 #endif
