@@ -66,7 +66,7 @@ void error(int error, char *info)
 			fprintf(stderr, "Error: malloc failed\n");
 			break;
 		default:
-			printf("code works!\n");
+			fprintf("code works!\n");
 	}
 	if (command->fp)
 		fclose(command->fp);
